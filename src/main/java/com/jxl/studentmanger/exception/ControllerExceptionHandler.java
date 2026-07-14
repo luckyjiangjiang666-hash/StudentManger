@@ -3,9 +3,12 @@ package com.jxl.studentmanger.exception;
 
 import cn.dev33.satoken.exception.NotLoginException;
 import com.jxl.studentmanger.response.R;
+import io.swagger.v3.oas.annotations.Hidden;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+@Hidden
+//这是一个异常处理类，用于处理控制器中的异常捕获Controller的异常
 @RestControllerAdvice
 public class ControllerExceptionHandler {
 

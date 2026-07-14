@@ -21,19 +21,24 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+//@RestController这个注解可以指定这是一个控制器类，默认是小写，如果是小写，就不需要指定控制器类名
 @RestController
+//@Tag这个注解可以指定这是一个标签，默认是小写，如果是小写，就不需要指定标签名，接口文档
 @Tag(name = "管理员信息管理")
 public class AdminController {
+    //@Resource这个注解可以指定注入一个资源，默认是小写，如果是小写，就不需要指定资源名
     @Resource
     private AdminServiceImpl adminService;
     @Resource
     private CaptchaCache captchaCache;
 
     @Operation(summary = "新增管理员")
+    //@PostMapping这个注解可以指定这是一个POST请求，默认是小写，如果是小写，就不需要指定请求路径
     @PostMapping("/admin/add")
     @CrossOrigin
     @SaCheckLogin
     public R add(@RequestBody Admin admin){
+        //MyBatis-Plus 提供的一个查询条件构造器，用于构建查询条件
         LambdaQueryWrapper<Admin> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         lambdaQueryWrapper.eq(Admin::getUsername,admin.getUsername());
         long count = adminService.count(lambdaQueryWrapper);
@@ -50,6 +55,7 @@ public class AdminController {
      * @param pagenum 当前页码
      * @param pagesize 每页条数
      */
+    //@Operation这个注解可以指定这是一个操作，默认是小写，如果是小写，就不需要指定操作名，接口文档
     @Operation(summary = "查询管理员列表")
     @PostMapping("/admin/list")
     @CrossOrigin
@@ -65,6 +71,7 @@ public class AdminController {
         adminWrapper.orderByDesc(Admin::getId);
         PageHelper.startPage(pagenum,pagesize);
         List<Admin> adminList = adminService.list(adminWrapper);
+        //包装查询结果为分页信息
         PageInfo<Admin> pageInfo = new PageInfo<>(adminList);
         return R.data(pageInfo);
     }
@@ -72,6 +79,7 @@ public class AdminController {
     @PostMapping("/admin/update")
     @CrossOrigin
     @SaCheckLogin
+    //@RequestBody这个注解可以指定请求体中的数据是JSON格式，默认是小写，如果是小写，就不需要指定请求体中的数据格式
     public R update(@RequestBody Admin admin){
         adminService.updateById(admin);
         return R.success();

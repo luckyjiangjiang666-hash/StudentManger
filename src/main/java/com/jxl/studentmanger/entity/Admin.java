@@ -1,6 +1,5 @@
 package com.jxl.studentmanger.entity;
 
-
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -9,12 +8,15 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
+//@TableName这个注解可以指定数据库表名，默认是类名的小写，如果是类名的小写，就不需要指定表名
 @TableName("admin")
 @Schema(description = "管理员实体类")
 public class Admin {
+    //@TableId这个注解可以指定主键的类型，默认是自增
     @TableId(type = IdType.AUTO)
     private Long id;
 
+    //Schema这个注解可以指定属性的描述，默认是属性名的小写，如果是属性名的小写，就不需要指定描述，接口文档
     @Schema(description = "用户名")
     private String username;
 

@@ -19,7 +19,9 @@ spring:
       test-on-borrow: true  # 申请连接时执行validationQuery
       test-while-idle: true  # 空闲时检测连接
       test-on-return: false  # 归还连接时不检测
-
+  web:
+    favicon:
+      enabled: false
 # springdoc-openapi项目配置
 springdoc:
   swagger-ui:
